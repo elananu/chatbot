@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
         }
-
         .chat-container {
             width: 400px;
             margin: 50px auto;
@@ -20,7 +19,6 @@
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
         .messages {
             height: 300px;
             overflow-y: auto;
@@ -32,11 +30,9 @@
         .messages .user, .messages .bot {
             margin: 10px 0;
         }
-
         .messages .user {
             text-align: right;
         }
-
         .messages .bot {
             text-align: left;
             color: blue;
@@ -46,7 +42,6 @@
             display: flex;
             margin-top: 10px;
         }
-
         .input-box input {
             flex: 1;
             padding: 10px;
@@ -63,7 +58,6 @@
             margin-left: 5px;
             cursor: pointer;
         }
-
         .input-box button:hover {
             background-color: #218838;
         }
@@ -78,7 +72,6 @@
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
-
     <script>
         function appendMessage(sender, message) {
             const messagesDiv = document.getElementById("messages");
@@ -88,25 +81,19 @@
             messagesDiv.appendChild(messageDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
-
         async function sendMessage() {
             const userInput = document.getElementById("userInput").value;
             if (userInput.trim() === "") return;
-
             appendMessage("user", "You: " + userInput);
             document.getElementById("userInput").value = "";
-
-            // Send the message to the backend
             const response = await fetch("/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: userInput })
             });
-
             const data = await response.json();
             appendMessage("bot", "Bot: " + data.response);
         }
-
         document.getElementById("userInput").addEventListener("keyup", function (event) {
             if (event.key === "Enter") {
                 sendMessage();
@@ -115,3 +102,4 @@
     </script>
 </body>
 </html>
+
